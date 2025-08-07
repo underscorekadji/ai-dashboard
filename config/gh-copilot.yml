@@ -1,0 +1,99 @@
+- name: GitHub Copilot
+  columns:
+    - size: small
+      widgets:
+        - type: custom-api
+          url: https://eu.githubstatus.com/api/v2/components.json
+          title: GitHub Services Status
+          cache: 10m
+          template: |
+            <div>
+              {{ range .JSON.Array "components" }}
+                <div style="display: flex; justify-content: space-between; padding: 2px 0;">
+                  <span>{{ .String "name" }}</span>
+                  <span>
+                    {{ if eq (.String "status") "operational" }}
+                      <span class="color-positive">● OK</span>
+                    {{ else }}
+                      <span class="color-negative">● {{ .String "status" }}</span>
+                    {{ end }}
+                  </span>
+                </div>
+              {{ end }}
+            </div>
+
+        - type: bookmarks
+          title: Copilot — Resources
+          groups:
+            - title: Links
+              links:
+                - title: Documentation
+                  url: https://docs.github.com/en/copilot
+                  icon: si:github
+                - title: Training
+                  url: https://learn.microsoft.com/en-us/search/?terms=GitHub%20Copilot&category=Training
+                  icon: mdi:school
+                - title: Certifications
+                  url: https://learn.microsoft.com/en-us/credentials/certifications/github-copilot/?practice-assessment-type=certification
+                  icon: mdi:certificate
+                - title: AI & ML Blog
+                  url: https://github.blog/ai-and-ml/
+                  icon: mdi:book-open-page-variant
+                - title: Changelog
+                  url: https://github.blog/changelog/
+                  icon: mdi:history
+                - title: VS Code — All updates
+                  url: https://code.visualstudio.com/updates/
+                  icon: mdi:microsoft-visual-studio-code
+                - title: YouTube Playlist
+                  url: https://www.youtube.com/@GitHub/search?query=copilot
+                  icon: mdi:youtube
+                - title: Reddit Community
+                  url: https://www.reddit.com/r/githubcopilot/
+                  icon: mdi:reddit
+                - title: Discord Community
+                  url: https://discord.com/invite/github
+                  icon: mdi:discord
+    - size: full
+      widgets:
+        - type: group
+          widgets:
+            - type: rss
+              title: GitHub Changelog
+              limit: 10
+              collapse-after: 5
+              cache: 6h
+              feeds:
+                - url: https://github.blog/changelog/label/copilot/feed/
+                  title: GitHub Changelog
+            - type: rss
+              title: GitHub AI & ML Blog
+              limit: 10
+              collapse-after: 5
+              cache: 6h
+              feeds:
+                - url: https://github.blog/ai-and-ml/feed/
+                  title: GitHub AI & ML
+
+        - type: videos
+          title: GitHub Copilot Playlist
+          playlists:
+            - PL0lo9MOBetEHEHi9h0k_lPn0XZdEeYZDS
+          limit: 10
+          style: horizontal-cards
+
+        - type: group
+          widgets:
+            - type: reddit
+              subreddit: GithubCopilot
+              sort-by: top
+              top-period: week
+              show-thumbnails: true
+
+    - size: small
+      widgets:
+        - type: repository
+          repository: github/awesome-copilot
+          pull-requests-limit: 5
+          issues-limit: 3
+          commits-limit: 10
