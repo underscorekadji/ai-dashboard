@@ -1,13 +1,16 @@
 # AI Tools Monitoring Dashboard
 
-Containerized personal dashboard built with Glance. It aggregates GitHub Copilot news, status, videos, blog posts, and handy links into a single page, with health checks, persistent data, and one-liner scripts to run locally via Docker.
+Containerized personal dashboard built with Glance that aggregates various AI tools resources including GitHub Copilot, ChatGPT, and Claude Code. Provides news, status, videos, blog posts, and handy links in a single interface with health checks, persistent data, and simple scripts to run locally via Docker.
 
 ## Features
 
-- Glance dashboard preconfigured for GitHub Copilot resources (status, RSS, YouTube playlist, Reddit, bookmarks)
+- Multi-page Glance dashboard with dedicated sections for:
+  - GitHub Copilot (status, RSS, YouTube playlist, Reddit, bookmarks)
+  - ChatGPT resources and updates
+  - Claude Code documentation and resources
 - Docker Compose with healthcheck, persistent volume, and simple networking
 - Start/stop/restart scripts that bootstrap .env automatically
-- Configuration-first setup using YAML in `config/`
+- Modular configuration system using YAML includes in `config/`
 
 ## Prerequisites
 
@@ -42,7 +45,10 @@ cp .env.example .env
 ## Configuration
 
 - Main entrypoint: `config/glance.yml`
-  - Includes `config/gh-copilot.yml` which defines the Copilot-focused page: status widget, bookmarks, RSS feeds, YouTube playlist, subreddit, and a repository panel.
+  - Includes multiple page configurations:
+    - `config/gh-copilot.yml` - GitHub Copilot resources (status, RSS, YouTube, Reddit, repositories)
+    - `config/chatgpt.yml` - ChatGPT-related resources and updates
+    - `config/claude-code.yml` - Claude Code documentation and tools
 - Ports and host binding are controlled via `.env`:
 
 ```properties
@@ -62,10 +68,14 @@ If you want to customize or add more pages/widgets, edit the YAML files in `conf
 ├── assets/
 │   └── custom.css              # (optional) place for styling; not mounted by default
 ├── config/
-│   ├── glance.yml              # main Glance configuration (includes gh-copilot.yml)
-│   └── gh-copilot.yml          # Copilot-specific widgets and layout
+│   ├── glance.yml              # main Glance configuration (includes all pages)
+│   ├── gh-copilot.yml          # GitHub Copilot widgets and layout
+│   ├── chatgpt.yml             # ChatGPT resources configuration
+│   └── claude-code.yml         # Claude Code resources configuration
 ├── docs/
-│   └── GitHub_Copilot.md       # curated Copilot resources
+│   ├── github_copilot-resources.md     # curated Copilot resources
+│   ├── chatgpt-resources.md             # ChatGPT resource collection
+│   └── anthropic_claude-code-resources.md # Claude Code documentation
 ├── scripts/
 │   ├── start.sh                # creates .env (if missing), pulls images, and starts services
 │   ├── stop.sh                 # stops services
