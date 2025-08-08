@@ -1,0 +1,133 @@
+- name: ChatGPT
+  columns:
+    - size: small
+      widgets:
+        - type: custom-api
+          url: https://status.openai.com/api/v2/components.json
+          title: OpenAI Services Status
+          cache: 3m
+          template: |
+            <div>
+              {{ range .JSON.Array "components" }}
+                {{ $name := .String "name" }}
+                {{ if or (eq $name "Chat")
+                          (eq $name "Conversations")
+                          (eq $name "GPTs")
+                          (eq $name "Playground")
+                          (eq $name "GPT vision")
+                          (eq $name "Image Generation")
+                          (eq $name "Dall-E")
+                          (eq $name "Images")
+                          (eq $name "Video generation")
+                          (eq $name "Files")
+                          (eq $name "Uploads")
+                          (eq $name "File uploads")
+                          (eq $name "Deep Research")
+                          (eq $name "Search")
+                          (eq $name "Agent")
+                          (eq $name "Responses")
+                          (eq $name "Realtime")
+                          (eq $name "Context connectors")
+                          (eq $name "Embeddings")
+                          (eq $name "Fine-tuning") }}
+                  <div style="display: flex; justify-content: space-between; padding: 2px 0;">
+                    <span>{{ .String "name" }}</span>
+                    <span>
+                      {{ if eq (.String "status") "operational" }}
+                        <span class="color-positive">✓ OK</span>
+                      {{ else }}
+                        <span class="color-negative">✗ {{ .String "status" }}</span>
+                      {{ end }}
+                    </span>
+                  </div>
+                {{ end }}
+              {{ end }}
+            </div>
+
+        - type: bookmarks
+          title: ChatGPT — Resources
+          groups:
+            - title: Official
+              links:
+                - title: ChatGPT (Web)
+                  url: https://chatgpt.com
+                  icon: mdi:web
+                - title: ChatGPT — Release Notes
+                  url: https://help.openai.com/en/articles/6825453-chatgpt-release-notes
+                  icon: mdi:note-text
+                - title: OpenAI News (Blog)
+                  url: https://openai.com/blog/
+                  icon: mdi:newspaper-variant
+                - title: OpenAI Platform Docs
+                  url: https://platform.openai.com/docs
+                  icon: mdi:book-open-page-variant
+                - title: OpenAI Cookbook
+                  url: https://cookbook.openai.com
+                  icon: mdi:book
+                - title: OpenAI Help Center
+                  url: https://help.openai.com/
+                  icon: mdi:help-circle
+                - title: OpenAI Status
+                  url: https://status.openai.com/
+                  icon: mdi:alert-circle
+                - title: Safety & Policies
+                  url: https://openai.com/policies
+                  icon: mdi:shield-check
+            - title: Community
+              links:
+                - title: YouTube — OpenAI
+                  url: https://www.youtube.com/@OpenAI
+                  icon: mdi:youtube
+                - title: Reddit — r/ChatGPT
+                  url: https://www.reddit.com/r/ChatGPT/
+                  icon: mdi:reddit
+                - title: OpenAI Developer Forum
+                  url: https://community.openai.com/
+                  icon: mdi:account-group
+                - title: Awesome ChatGPT Prompts
+                  url: https://github.com/f/awesome-chatgpt-prompts
+                  icon: si:github
+
+    - size: full
+      widgets:
+        - type: group
+          widgets:
+            - type: rss
+              title: OpenAI News
+              limit: 10
+              collapse-after: 5
+              cache: 6h
+              feeds:
+                - url: https://openai.com/blog/rss.xml
+                  title: OpenAI Blog
+            - type: rss
+              title: OpenAI Status Updates
+              limit: 10
+              collapse-after: 5
+              cache: 6h
+              feeds:
+                - url: https://status.openai.com/history.rss
+                  title: OpenAI Status
+
+        - type: videos
+          title: OpenAI — Latest Videos
+          channels:
+            - UCXZCJLdBC09xxGZ6gcdrc6A
+          limit: 10
+          style: horizontal-cards
+
+        - type: group
+          widgets:
+            - type: reddit
+              subreddit: ChatGPT
+              sort-by: top
+              top-period: week
+              show-thumbnails: true
+
+    - size: small
+      widgets:
+        - type: repository
+          repository: f/awesome-chatgpt-prompts
+          pull-requests-limit: 5
+          issues-limit: 3
+          commits-limit: 10
