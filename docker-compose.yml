@@ -9,6 +9,7 @@ services:
       - glance_data:/app/data
     environment:
       - GLANCE_PORT=8080
+      - TZ=${TZ:-Europe/Vilnius}
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8080"]
