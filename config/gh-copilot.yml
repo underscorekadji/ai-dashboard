@@ -13,9 +13,9 @@
                   <span>{{ .String "name" }}</span>
                   <span>
                     {{ if eq (.String "status") "operational" }}
-                      <span class="color-positive">● OK</span>
+                      <span class="color-positive">✓ OK</span>
                     {{ else }}
-                      <span class="color-negative">● {{ .String "status" }}</span>
+                      <span class="color-negative">✗ {{ .String "status" }}</span>
                     {{ end }}
                   </span>
                 </div>
