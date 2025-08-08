@@ -1,0 +1,115 @@
+- name: Anthropic
+  columns:
+    - size: small
+      widgets:
+        - type: custom-api
+          url: https://status.anthropic.com/api/v2/components.json
+          title: Anthropic Services Status
+          cache: 5m
+          template: |
+            <div>
+              {{ range .JSON.Array "components" }}
+                {{ $name := .String "name" }}
+                {{ if or (eq $name "claude.ai")
+                          (eq $name "console.anthropic.com")
+                          (eq $name "api.anthropic.com")
+                          (eq $name "Claude Code") }}
+                  <div style="display: flex; justify-content: space-between; padding: 2px 0;">
+                    <span>{{ .String "name" }}</span>
+                    <span>
+                      {{ if eq (.String "status") "operational" }}
+                        <span class="color-positive">✓ OK</span>
+                      {{ else }}
+                        <span class="color-negative">✗ {{ .String "status" }}</span>
+                      {{ end }}
+                    </span>
+                  </div>
+                {{ end }}
+              {{ end }}
+            </div>
+
+        - type: bookmarks
+          title: Anthropic — Resources
+          groups:
+            - title: Official
+              links:
+                - title: Claude (Web)
+                  url: https://claude.ai/
+                  icon: mdi:web
+                - title: Claude Code
+                  url: https://www.anthropic.com/claude-code
+                  icon: mdi:code-braces
+                - title: Docs — Claude Code Quickstart
+                  url: https://docs.anthropic.com/en/docs/claude-code/quickstart
+                  icon: mdi:book-open-page-variant
+                - title: Docs — Developer Platform
+                  url: https://docs.anthropic.com/
+                  icon: mdi:book
+                - title: Release Notes — Claude Code
+                  url: https://docs.anthropic.com/en/release-notes/claude-code
+                  icon: mdi:note-text
+                - title: Status
+                  url: https://status.anthropic.com/
+                  icon: mdi:alert-circle
+                - title: Console (Developer)
+                  url: https://console.anthropic.com/
+                  icon: mdi:monitor
+            - title: Community
+              links:
+                - title: Anthropic YouTube
+                  url: https://www.youtube.com/@anthropic-ai
+                  icon: mdi:youtube
+                - title: Reddit — r/ClaudeAI
+                  url: https://www.reddit.com/r/ClaudeAI/
+                  icon: mdi:reddit
+                - title: Anthropic Cookbook (GitHub)
+                  url: https://github.com/anthropics/anthropic-cookbook
+                  icon: si:github
+
+    - size: full
+      widgets:
+        - type: group
+          widgets:
+            - type: rss
+              title: Anthropic Official
+              limit: 10
+              collapse-after: 5
+              cache: 6h
+              feeds:
+                - url: https://raw.githubusercontent.com/Olshansk/rss-feeds/main/feeds/feed_anthropic_news.xml
+                  title: Anthropic News
+                - url: https://raw.githubusercontent.com/Olshansk/rss-feeds/main/feeds/feed_anthropic_engineering.xml
+                  title: Anthropic Engineering
+                - url: https://raw.githubusercontent.com/Olshansk/rss-feeds/main/feeds/feed_anthropic_research.xml
+                  title: Anthropic Research
+            - type: rss
+              title: Release Notes
+              style: detailed-list
+              limit: 10
+              collapse-after: 5
+              cache: 6h
+              feeds:
+                - url: https://raw.githubusercontent.com/underscorekadji/rss-feeds/refs/heads/main/feeds/feed_anthropic_changelog_claude_code.xml
+                  title: Changelog
+
+        - type: videos
+          title: Anthropic — Latest Videos
+          channels:
+            - UCrDwWp7EBBv4NwvScIpBDOA
+          limit: 10
+          style: horizontal-cards
+
+        - type: group
+          widgets:
+            - type: reddit
+              subreddit: ClaudeAI
+              sort-by: top
+              top-period: week
+              show-thumbnails: true
+
+    - size: small
+      widgets:
+        - type: repository
+          repository: anthropics/anthropic-cookbook
+        - type: repository
+          repository: hesreallyhim/awesome-claude-code

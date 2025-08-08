@@ -1,3 +1,4 @@
 pages:
   - $include: gh-copilot.yml
   - $include: chatgpt.yml
+  - $include: claude-code.yml
