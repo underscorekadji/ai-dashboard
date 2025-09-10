@@ -89,7 +89,7 @@
               collapse-after: 5
               cache: 6h
               feeds:
-                - url: https://raw.githubusercontent.com/underscorekadji/rss-feeds/refs/heads/main/feeds/feed_anthropic_changelog_claude_code.xml
+                - url: https://raw.githubusercontent.com/Olshansk/rss-feeds/main/feeds/feed_anthropic_changelog_claude_code.xml
                   title: Changelog
 
         - type: videos
