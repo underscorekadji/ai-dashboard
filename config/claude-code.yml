@@ -1,4 +1,4 @@
-- name: Anthropic
+- name: Anthropic (Claude)
   columns:
     - size: small
       widgets:
