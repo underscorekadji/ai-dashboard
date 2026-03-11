@@ -6,6 +6,7 @@ theme:
   negative-color: 0 100 67
 
 pages:
+  - $include: index.yml
   - $include: gh-copilot.yml
   - $include: chatgpt.yml
   - $include: claude-code.yml
