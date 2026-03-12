@@ -26,6 +26,9 @@ Thumbs.db
 # SSL certificates (if used)
 ssl/
 
+# Docker Compose override (local dev)
+docker/docker-compose.override.yml
+
 # Backup files
 *.backup
 *.bak

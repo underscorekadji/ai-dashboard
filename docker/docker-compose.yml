@@ -1,15 +1,19 @@
 services:
   glance:
-    image: glanceapp/glance:latest
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: ghcr.io/underscorekadji/ai-dashboard:latest
     container_name: ai-dashboard-glance
+    env_file:
+      - ../.env
     ports:
       - "${GLANCE_PORT:-8080}:8080"
     volumes:
-      - ./config:/app/config:ro
       - glance_data:/app/data
     environment:
       - GLANCE_PORT=8080
-      - TZ=${TZ:-Europe/Vilnius}
+      - TZ=${TZ:-UTC}
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8080"]

@@ -1,16 +1,12 @@
 # AI Tools Monitoring Dashboard
 
-Containerized personal dashboard built with Glance that aggregates various AI tools resources including GitHub Copilot, ChatGPT, and Claude Code. Provides news, status, videos, blog posts, and handy links in a single interface with health checks, persistent data, and simple scripts to run locally via Docker.
+Containerized personal dashboard built with [Glance](https://github.com/glanceapp/glance) that aggregates AI tools resources — news, status, videos, blog posts, and links — in a single interface via Docker.
 
 ## Features
 
-- Multi-page Glance dashboard with dedicated sections for:
-  - GitHub Copilot (status, RSS, YouTube playlist, Reddit, bookmarks)
-  - ChatGPT resources and updates
-  - Claude Code documentation and resources
-- Docker Compose with healthcheck, persistent volume, and simple networking
-- Start/stop/restart scripts that bootstrap .env automatically
-- Modular configuration system using YAML includes in `config/`
+- Multi-page dashboard: Home, GitHub Copilot, ChatGPT, Claude Code, Cursor, Local LLMs
+- RSS feeds, status monitors, YouTube playlists, Reddit, bookmarks
+- Dockerized with healthcheck and modular YAML config
 
 ## Prerequisites
 
@@ -19,106 +15,71 @@ Containerized personal dashboard built with Glance that aggregates various AI to
 
 ## Quick start
 
-1. Create your environment file (optional; script will create it for you):
+1. Create your environment file:
 
 ```bash
 cp .env.example .env
 ```
 
-2. Start the dashboard:
-
-```bash
-./scripts/start.sh
-```
-
-3. Open the UI:
-
-- [http://localhost:8080](http://localhost:8080) (default)
-
-4. Stop or restart when needed:
-
-```bash
-./scripts/stop.sh
-./scripts/restart.sh
-```
-
-## Configuration
-
-- Main entrypoint: `config/glance.yml`
-  - Includes multiple page configurations:
-    - `config/gh-copilot.yml` - GitHub Copilot resources (status, RSS, YouTube, Reddit, repositories)
-    - `config/chatgpt.yml` - ChatGPT-related resources and updates
-    - `config/claude-code.yml` - Claude Code documentation and tools
-- Ports and host binding are controlled via `.env`:
-
-```properties
-# .env
-GLANCE_PORT=8080
-GLANCE_HOST=0.0.0.0
-```
-
-- Docker Compose mounts `./config` into the container read-only and persists data in the `glance_data` volume.
-
-If you want to customize or add more pages/widgets, edit the YAML files in `config/` and restart the stack.
-
-## Project structure
-
-```text
-.
-├── assets/
-│   └── custom.css              # (optional) place for styling; not mounted by default
-├── config/
-│   ├── glance.yml              # main Glance configuration (includes all pages)
-│   ├── gh-copilot.yml          # GitHub Copilot widgets and layout
-│   ├── chatgpt.yml             # ChatGPT resources configuration
-│   └── claude-code.yml         # Claude Code resources configuration
-├── docs/
-│   ├── github_copilot-resources.md     # curated Copilot resources
-│   ├── chatgpt-resources.md             # ChatGPT resource collection
-│   └── anthropic_claude-code-resources.md # Claude Code documentation
-├── scripts/
-│   ├── start.sh                # creates .env (if missing), pulls images, and starts services
-│   ├── stop.sh                 # stops services
-│   └── restart.sh              # stop + start
-├── docker-compose.yml          # Glance service, healthcheck, volume and network
-├── .env.example                # default environment variables
-└── README.md
-```
-
-## Service details
-
-- Image: `glanceapp/glance:latest`
-- Container: `ai-dashboard-glance`
-- Port mapping: `${GLANCE_PORT:-8080}:8080`
-- Healthcheck: HTTP check on `http://localhost:8080`
-- Data persistence: `glance_data` Docker volume
-
-## Reverse proxy (optional)
-
-An example Nginx service is scaffolded (commented) in `docker-compose.yml` for SSL termination. To use it, add your `nginx.conf` and certificates, then uncomment the service and volumes.
-
-## Maintenance
-
-- Update to the latest image:
+2. Pull and start the dashboard:
 
 ```bash
 docker-compose pull
-./scripts/restart.sh
+docker-compose up -d
 ```
 
-- View logs:
+3. Open [http://localhost:8080](http://localhost:8080)
+
+4. Stop, restart, or view logs:
 
 ```bash
+docker-compose down
+docker-compose restart
 docker-compose logs -f glance
+```
+
+
+## Configuration
+
+Page configs in `config/`:
+
+- `glance.yml` — main entrypoint (includes all pages)
+- `index.yml` — home page
+- `gh-copilot.yml` — GitHub Copilot
+- `chatgpt.yml` — ChatGPT
+- `claude-code.yml` — Claude Code
+- `cursor.yml` — Cursor
+- `local-llm.yml` — Local LLMs
+
+Environment variables (`.env`): `GLANCE_PORT` (default `8080`), `GLANCE_HOST` (default `0.0.0.0`).
+
+Edit YAML files in `config/` and restart the stack to apply changes.
+
+## Local testing
+
+Build and run the image locally:
+
+```bash
+docker-compose up -d --build
+```
+
+For live-editing config and assets without rebuilding, create an override file:
+
+```bash
+cp docker/docker-compose.override.yml.example docker/docker-compose.override.yml
+```
+
+This mounts `config/` and `assets/` as read-only volumes. After editing any YAML or CSS, restart the container to pick up changes:
+
+```bash
+docker-compose restart
 ```
 
 ## Troubleshooting
 
-- Docker isn’t running: start Docker Desktop and retry.
-- Port already in use: change `GLANCE_PORT` in `.env`, then restart.
-- Blank page or config errors: validate YAML in `config/` and check logs with `docker compose logs glance`.
-  
- Use: `docker-compose logs glance` if you’re following the scripts in this repo.
+- **Docker isn't running** — start Docker Desktop and retry.
+- **Port already in use** — change `GLANCE_PORT` in `.env`, then restart.
+- **Config errors** — validate YAML in `config/` and check `docker-compose logs glance`.
 
 ## References
 

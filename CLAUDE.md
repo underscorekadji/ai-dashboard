@@ -79,7 +79,9 @@ docker-compose ps
 
 ## File Structure
 
-- `docker-compose.yml`: Service definitions and networking
+- `docker/docker-compose.yml`: Service definitions and networking
+- `docker/Dockerfile`: Container image definition
+- `docker/docker-compose.override.yml.example`: Local dev override template
 - `config/glance.yml`: Dashboard configuration
 - `scripts/`: Start/stop automation scripts
 - `assets/`: Custom CSS styling

@@ -1,0 +1,7 @@
+# Copy this file to docker/docker-compose.override.yml for local development.
+# This re-mounts config and assets as volumes so you can edit without rebuilding.
+services:
+  glance:
+    volumes:
+      - ../config:/app/config:ro
+      - ../assets:/app/assets:ro
