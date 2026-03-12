@@ -1,0 +1,57 @@
+- name: Cursor
+  columns:
+    - size: small
+      widgets:
+        - type: bookmarks
+          title: Cursor — Resources
+          groups:
+            - title: Official
+              links:
+                - title: Cursor (Website)
+                  url: https://www.cursor.com
+                  icon: mdi:web
+                - title: Documentation
+                  url: https://docs.cursor.com
+                  icon: mdi:book-open-page-variant
+                - title: Changelog
+                  url: https://www.cursor.com/changelog
+                  icon: mdi:history
+                - title: Forum
+                  url: https://forum.cursor.com
+                  icon: mdi:account-group
+            - title: Community
+              links:
+                - title: GitHub — cursor
+                  url: https://github.com/getcursor/cursor
+                  icon: si:github
+                - title: Reddit — r/cursor
+                  url: https://www.reddit.com/r/cursor/
+                  icon: mdi:reddit
+
+    - size: full
+      widgets:
+        - type: group
+          widgets:
+            - type: rss
+              title: Cursor Blog
+              limit: 10
+              collapse-after: 5
+              cache: 6h
+              feeds:
+                - url: https://raw.githubusercontent.com/Olshansk/rss-feeds/main/feeds/feed_cursor.xml
+                  title: Cursor Blog
+
+        - type: group
+          widgets:
+            - type: reddit
+              subreddit: cursor
+              sort-by: top
+              top-period: week
+              show-thumbnails: true
+
+    - size: small
+      widgets:
+        - type: repository
+          repository: getcursor/cursor
+        - type: repository
+          repository: PatrickJS/awesome-cursorrules

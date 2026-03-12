@@ -10,3 +10,5 @@ pages:
   - $include: gh-copilot.yml
   - $include: chatgpt.yml
   - $include: claude-code.yml
+  - $include: cursor.yml
+  - $include: local-llm.yml

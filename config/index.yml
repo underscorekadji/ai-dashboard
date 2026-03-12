@@ -47,6 +47,8 @@
               title: Anthropic Engineering
             - url: https://github.blog/ai-and-ml/feed/
               title: GitHub AI & ML
+            - url: https://raw.githubusercontent.com/Olshansk/rss-feeds/main/feeds/feed_google_ai.xml
+              title: Google AI Blog
 
         - type: hacker-news
           limit: 15
@@ -54,6 +56,15 @@
 
     - size: small
       widgets:
+        - type: rss
+          title: Paul Graham
+          limit: 5
+          collapse-after: 3
+          cache: 24h
+          feeds:
+            - url: https://raw.githubusercontent.com/Olshansk/rss-feeds/main/feeds/feed_paulgraham.xml
+              title: Paul Graham
+
         - type: reddit
           subreddit: artificial
           sort-by: top

@@ -1,0 +1,85 @@
+- name: Local LLM
+  columns:
+    - size: small
+      widgets:
+        - type: bookmarks
+          title: Local LLM — Resources
+          groups:
+            - title: Runtimes & Servers
+              links:
+                - title: Ollama
+                  url: https://ollama.com
+                  icon: si:ollama
+                - title: LM Studio
+                  url: https://lmstudio.ai
+                  icon: mdi:lightning-bolt
+                - title: llama.cpp
+                  url: https://github.com/ggml-org/llama.cpp
+                  icon: si:github
+                - title: vLLM
+                  url: https://github.com/vllm-project/vllm
+                  icon: si:github
+            - title: Desktop Apps & UIs
+              links:
+                - title: Open WebUI
+                  url: https://github.com/open-webui/open-webui
+                  icon: mdi:web
+                - title: Jan
+                  url: https://jan.ai
+                  icon: mdi:desktop-mac
+            - title: Community
+              links:
+                - title: r/LocalLLaMA
+                  url: https://www.reddit.com/r/LocalLLaMA/
+                  icon: mdi:reddit
+                - title: Ollama Discord
+                  url: https://discord.gg/ollama
+                  icon: mdi:discord
+                - title: Ollama Model Library
+                  url: https://ollama.com/library
+                  icon: mdi:database
+
+    - size: full
+      widgets:
+        - type: group
+          widgets:
+            - type: rss
+              title: Ollama Blog
+              limit: 10
+              collapse-after: 5
+              cache: 6h
+              feeds:
+                - url: https://raw.githubusercontent.com/Olshansk/rss-feeds/main/feeds/feed_ollama.xml
+                  title: Ollama Blog
+
+        - type: group
+          widgets:
+            - type: reddit
+              subreddit: MachineLearning
+              sort-by: top
+              top-period: week
+              show-thumbnails: true
+            - type: reddit
+              subreddit: selfhosted
+              sort-by: top
+              top-period: week
+              show-thumbnails: true
+            - type: reddit
+              subreddit: LocalLLaMA
+              sort-by: top
+              top-period: week
+              show-thumbnails: true
+            - type: reddit
+              subreddit: ollama
+              sort-by: top
+              top-period: week
+              show-thumbnails: true
+
+    - size: small
+      widgets:
+        - type: repository
+          repository: ollama/ollama
+        - type: repository
+          repository: ggml-org/llama.cpp
+        - type: repository
+          repository: open-webui/open-webui

@@ -82,6 +82,8 @@
                   title: Anthropic Engineering
                 - url: https://raw.githubusercontent.com/Olshansk/rss-feeds/main/feeds/feed_anthropic_research.xml
                   title: Anthropic Research
+                - url: https://raw.githubusercontent.com/Olshansk/rss-feeds/main/feeds/feed_claude.xml
+                  title: Claude Blog
             - type: rss
               title: Release Notes
               style: detailed-list
