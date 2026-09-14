@@ -91,7 +91,7 @@
               collapse-after: 5
               cache: 6h
               feeds:
-                - url: https://raw.githubusercontent.com/Olshansk/rss-feeds/main/feeds/feed_anthropic_changelog_claude_code.xml
+                - url: https://github.com/anthropics/claude-code/releases.atom
                   title: Changelog
 
         - type: videos
